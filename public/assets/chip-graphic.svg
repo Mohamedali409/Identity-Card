@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" width="160" height="120">
+  <defs>
+    <linearGradient id="goldFoil" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE79A" />
+      <stop offset="30%" stop-color="#E5B942" />
+      <stop offset="60%" stop-color="#C4961D" />
+      <stop offset="100%" stop-color="#F2D175" />
+    </linearGradient>
+  </defs>
+  <!-- Base Chip Body -->
+  <rect width="160" height="120" rx="16" fill="url(#goldFoil)" stroke="#78590D" stroke-width="2" />
+  <!-- Circuit Traces -->
+  <path d="M 0,40 L 45,40 C 55,40 60,45 60,55 L 60,65 C 60,75 55,80 45,80 L 0,80" fill="none" stroke="#78590D" stroke-width="2.5" />
+  <path d="M 160,40 L 115,40 C 105,40 100,45 100,55 L 100,65 C 100,75 105,80 115,80 L 160,80" fill="none" stroke="#78590D" stroke-width="2.5" />
+  <path d="M 60,0 L 60,40 M 100,0 L 100,40 M 60,120 L 60,80 M 100,120 L 100,80" fill="none" stroke="#78590D" stroke-width="2.5" />
+  <!-- Central Micro-processor Core -->
+  <rect x="65" y="45" width="30" height="30" rx="6" fill="#A17711" stroke="#FFE79A" stroke-width="1.5" />
+</svg>

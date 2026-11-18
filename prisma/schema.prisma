@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Profile {
+  id           String   @id @default("default-profile")
+  fullName     String   @default("Mohamed Ali")
+  headline     String   @default("Full-Stack Developer | Backend Developer (Node.js) | Software Engineer")
+  bio          String   @default("Full-Stack Developer focused on building scalable backend systems, modern web applications, and reliable software solutions. Experienced with Node.js, Express.js, React, databases, API development, and cloud technologies.")
+  location     String   @default("Cairo, Egypt")
+  email        String   @default("enagmoahed@gmail.com")
+  phone        String   @default("+20 100 000 0000")
+  whatsapp     String   @default("+20 100 000 0000")
+  availability String   @default("Available for Opportunities")
+  avatarUrl    String   @default("/assets/mohamed-ali.png")
+  chipDesign   String   @default("cyber-gold")
+  updatedAt    DateTime @updatedAt
+}
+
+model CV {
+  id            String   @id @default(cuid())
+  title         String
+  targetRole    String
+  description   String
+  tags          String   // Comma-separated tags (e.g. "Node.js, Express, PostgreSQL, Redis")
+  fileUrl       String
+  fileName      String
+  fileSize      Int      // In bytes
+  mimeType      String   @default("application/pdf")
+  isFeatured    Boolean  @default(false)
+  isVisible     Boolean  @default(true)
+  order         Int      @default(0)
+  downloadCount Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Skill {
+  id               String   @id @default(cuid())
+  name             String
+  category         String   // "Backend & APIs", "Frontend & Web", "Databases & Cache", "Cloud & DevOps", "Tools & Practices"
+  proficiencyLabel String?  // Optional label like "Advanced", "Proficient", "Familiar"
+  order            Int      @default(0)
+  isVisible        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+}
+
+model Project {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  technologies String   // Comma-separated (e.g. "Node.js, Express, MongoDB, Docker")
+  repoUrl      String?
+  liveUrl      String?
+  imageUrl     String?
+  isFeatured   Boolean  @default(false)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model Education {
+  id            String   @id @default(cuid())
+  institution   String
+  degree        String
+  fieldOfStudy  String
+  startDate     String
+  endDate       String
+  description   String
+  credentialUrl String?
+  order         Int      @default(0)
+}
+
+model SocialLink {
+  id        String   @id @default(cuid())
+  platform  String   // "github", "linkedin", "email", "whatsapp", "custom"
+  label     String
+  url       String
+  icon      String   // Icon key for Lucide
+  isVisible Boolean  @default(true)
+  order     Int      @default(0)
+}
+
+model SiteSetting {
+  id               String   @id @default("site-config")
+  siteTitle        String   @default("Mohamed Ali — Developer Digital Identity")
+  metaDescription  String   @default("Mohamed Ali — Full-Stack & Backend Developer (Node.js). Interactive 3D Digital Identity Card, verified technical expertise, and tailored CV downloads.")
+  ogImageUrl       String   @default("/assets/og-image.png")
+  qrDestinationUrl String   @default("http://localhost:3000")
+  allowAnalytics   Boolean  @default(true)
+  updatedAt        DateTime @updatedAt
+}
+
+model AnalyticsEvent {
+  id         String   @id @default(cuid())
+  eventType  String   // "page_view", "cv_download", "vcard_save", "contact_click"
+  targetId   String?  // e.g. CV ID or link identifier
+  userAgent  String?
+  deviceType String?  // "mobile", "desktop", "tablet"
+  referer    String?
+  timestamp  DateTime @default(now())
+}
